@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_RT.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:48:53 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 13:49:14 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/27 00:38:22 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void configuration(t_minirt *rt)
         plan_parsing(rt);
     else if(ft_samestr(rt->pars.splitrest[0],"tr"))
             triangle_parsing(rt);
+    else if(ft_samestr(rt->pars.splitrest[0],"sq"))
+            square_parsing(rt);
     else
     error(5);
 }

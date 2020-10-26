@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 20:32:36 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 10:02:38 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/26 22:47:24 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,21 @@ t_objects *copy_triangle(t_vector point_a, t_vector point_b, t_vector point_c, t
     obj->point_a = point_a;
     obj->point_b = point_b;
     obj->point_c = point_c;
+    obj->color = color;
+
+    obj->next = NULL;
+    return (obj);
+}
+
+t_objects *copy_square(t_vector center, t_vector normal,double side_size, t_color color)
+{
+    t_objects *obj;
+
+    obj = malloc(sizeof(t_objects));
+
+    obj->sq_center = center;
+    obj->normal = normal;
+    obj->side_size = side_size;
     obj->color = color;
 
     obj->next = NULL;

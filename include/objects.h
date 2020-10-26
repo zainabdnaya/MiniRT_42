@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:35:53 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 13:36:49 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/26 22:27:32 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ typedef struct s_tringle
     t_color     color;
 }t_triangle;
 
-
+typedef struct s_square
+{
+    t_vector    center;
+    t_vector    normal;
+    double      side_size;
+    t_color     color;
+}t_square;
 
 #endif

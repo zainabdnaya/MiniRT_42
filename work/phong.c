@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 16:52:23 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 11:25:44 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/26 21:33:39 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_vector diffuse(t_minirt *rt)
     t_color color;
 
     color = rt->result_color;
-    rt->l_norm = vectorSub(rt->light->position, rt->position);
+   rt->l_norm = vectorSub(rt->light->position, rt->position);
     rt->l_norm = vectorNorme(rt->l_norm);
     m = vectorDot(rt->l_norm, rt->n_norm);
     m = max(0.0,m);
@@ -72,7 +72,6 @@ t_vector spec(t_minirt *rt)
     t_color color;
 
     color = rt->result_color;
- 
     dot = 2 * vectorDot(rt->n_norm, rt->l_norm);
     scal = vectorScale(rt->n_norm, dot);
     reflection = vectorSub(rt->l_norm,scal );

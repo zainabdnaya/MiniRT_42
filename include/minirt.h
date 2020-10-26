@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 22:06:47 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 13:47:44 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/27 00:39:26 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ typedef struct s_objects
     t_vector    point_b;
     t_vector    point_c;
     t_vector    tr_normal;
-    
-    
+    t_vector    sq_center;
+    double      side_size;
+
     struct s_objects   *next;
 }t_objects;
 
@@ -160,22 +161,25 @@ void        sphere_parsing(t_minirt *rt);
 void        light_parsing(t_minirt *rt);
 void        plan_parsing(t_minirt *rt);
 void        triangle_parsing(t_minirt *rt);
-/******************************************************************/
+void        square_parsing(t_minirt *rt);
 
+/******************************************************************/
 /*************Intersection  Objects ******************************/
-double        sphere_equation(t_minirt *rt);
-double        plan_equation(t_minirt *rt);
+double          sphere_equation(t_minirt *rt);
+double          plan_equation(t_minirt *rt);
 double          triangle_equation(t_minirt *rt);
-/******************************************************************/
+double          square_equation(t_minirt *rt);
 
+/******************************************************************/
 /**************************Objects*********************************/
-void      calcul_sphere(t_minirt *rt);
+void        calcul_sphere(t_minirt *rt);
 void      calcul_plan(t_minirt *rt);
 void       calcul_triangle(t_minirt *rt);
-/******************************************************************/
+void         calcul_square(t_minirt *rt);
+    /******************************************************************/
 
-/****************Phong*********************************************/
-t_vector    spec(t_minirt *rt);     
+    /****************Phong*********************************************/
+    t_vector spec(t_minirt *rt);
 t_vector    ambiant(t_minirt *rt);
 t_vector    diffuse(t_minirt *rt);
 /******************************************************************/
@@ -206,11 +210,11 @@ t_objects       *copy_triangle(t_vector point_a, t_vector point_b, t_vector poin
 void            print_list_sphere(t_objects *ip);
 void            print_list_pal(t_objects *ip);
 void            print_list_tr(t_objects *ip);
+t_objects       *copy_square(t_vector center, t_vector normal, double side_size, t_color color);
+    /******************************************************************/
 
-/******************************************************************/
-
-/*************************TOOLS***************************************/
-int         ft_compare_end(char *str, char *end);
+    /*************************TOOLS***************************************/
+    int ft_compare_end(char *str, char *end);
 int         ft_count(char **str);
 void        ft_node_back(t_list **head, t_list *next);
 t_list      *creat_new_node(void *data);
@@ -222,6 +226,7 @@ double      convert_to_double(char *string) ;
 int         ft_samestr(char *s1, char *s2);
 int         resol_check(char *resolution);
 double      my_power(double number, int power);
+
 /*************************************************************/
 /******************************************************************/
 

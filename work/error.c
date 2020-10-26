@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 09:00:02 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 13:35:53 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/26 22:31:55 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void obj_error(long nbr)
         write(2,"Error(24): The Normale Coordinates should be between [-1,1]",60);
     if (nbr == 25)
         write(2, "Error(25): Plan configuration is wrong!\n", 44);  
-      if (nbr == 26)
-        write(2, "Error(26): Triangle configuration is wrong!\n", 47);  
+    if (nbr == 26)
+        write(2, "Error(26): Triangle configuration is wrong!\n", 47);
+    if (nbr == 27)
+        write(2, "Error(26): square configuration is wrong!\n", 47);
 }

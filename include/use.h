@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   use.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:40:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 11:50:34 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/27 00:31:21 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,19 @@ typedef struct s_use
     t_vector    edge1;
     t_vector    edge2;
     t_vector    vect;
-    t_vector       vect1;
+    t_vector    vect1;
     double      determinant;
     t_vector    diffrence;
     double      inverse_determinant;
     double      v;
     double      u;
-    
+    double      one;
+    double      two;
+    t_vector    produit;
+    t_vector    point_pos;
+    t_vector    up;
+    t_vector   q_ed;
+    double     edge;
 
 } t_use;
 

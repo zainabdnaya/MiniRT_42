@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 10:07:48 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 14:42:11 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/10/26 22:05:54 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,9 @@ double    triangle_equation(t_minirt *rt)
 //prepare to test V parameter 
     if(scal.v < 0 || scal.v + scal.u > 1.0)
             return(0);
-    rt->list_obj->tr_normal = vectorCross(scal.edge1,scal.edge2);
-    rt->list_obj->tr_normal = vectorNorme(rt->list_obj->tr_normal);
+    rt->list_obj->normal = vectorCross(scal.edge1,scal.edge2);
     rt->solution = (vectorDot(scal.vect1,scal.edge2)) * (scal.inverse_determinant);
-    //printf("==>%f",rt->solution);
+//printf("==>%f",rt->solution);
             return(rt->solution);
 }
 
@@ -69,6 +68,6 @@ void    calcul_triangle(t_minirt *rt)
     
     scal.one_scal = vectorScale(rt->ray_direction, rt->list_obj->solution);
     rt->list_obj->position = vectorAdd(rt->cam->look_from, scal.one_scal);
-
-
+    rt->list_obj->normal = vectorNorme(rt->list_obj->normal);
+    //rt->l_norm = vectorSub(rt->light->position, rt->list_obj->position);
 }
