@@ -19,7 +19,9 @@ Objects :
   <br>
   <a href="https://ibb.co/GJxYDsW"><img src="https://i.ibb.co/qnyq80N/minirt.png" alt="minirt" border="0"></a>
   <a href="https://ibb.co/VqvWHcP"><img src="https://i.ibb.co/BCgV45S/Screen-Shot-2020-11-12-at-19-09-49.png" alt="Screen-Shot-2020-11-12-at-19-09-49" border="0"></a>
-**To Usage:**
+  
+  <br>
+** To Usage: **
 <br>The scene must be correctly formatted.
 <br>This project is using the Minilibx using the Metal framework and therefore should work only on macOS 10.13+.
 <br>You should follow this guide if you want to compile it on Linux.
