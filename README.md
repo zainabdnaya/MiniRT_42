@@ -1,5 +1,4 @@
 # Minirt
-This project is an introduction to the beautiful world of Raytracing.
 
 <a href="https://ibb.co/ssxGrMK"><img src="https://i.ibb.co/wpGX1xS/68747470733a2f2f696d6775722e636f6d2f3662336c3249782e706e67.png" alt="68747470733a2f2f696d6775722e636f6d2f3662336c3249782e706e67" border="0"></a>
 ## What's Raytraicng?!
