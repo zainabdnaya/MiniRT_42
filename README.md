@@ -5,7 +5,7 @@ This project is an introduction to the beautiful world of Raytracing.
 ## What's Raytraicng?!
     Ray tracing is a rendering technique that can produce incredibly realistic lighting effects. Essentially, an algorithm can trace the path of light, and then simulate the way that the light interacts with the virtual objects it ultimately hits in the computer-generated world. 
 
-
+<a href="https://ibb.co/Hq91FCV"><img src="https://i.ibb.co/vkMgwhH/Screen-Shot-2020-10-31-at-21-20-39.png" alt="Screen-Shot-2020-10-31-at-21-20-39" border="0"></a>
 
 
 Objects : 
