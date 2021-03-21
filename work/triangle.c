@@ -3,71 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 10:07:48 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 22:05:54 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/11/28 01:58:19 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "../headers/minirt.h"
 
-void triangle_parsing(t_minirt *rt)
+t_triangle *triangle_one(t_minirt *rt,t_triangle *triangle)
 {
-    int count;
-    t_triangle *triangle;
-
     if (!(triangle = malloc(sizeof(t_triangle))))
-        obj_error(23);
-    count = ft_count(rt->pars.splitrest);
-    if (count != 5)
     {
-        free(triangle);
-        obj_error(26);
+        obj_error(23);
+        exit(1);
     }
     triangle->point_a = vectorSplit(rt->pars.splitrest[1]);
     triangle->point_b = vectorSplit(rt->pars.splitrest[2]);
     triangle->point_c = vectorSplit(rt->pars.splitrest[3]);
-    triangle->color = colorSplit(rt, rt->pars.splitrest[4]);
-    rt->witch_object = 3;
-    add_objects(&rt->list_obj, copy_triangle(triangle->point_a, triangle->point_b, triangle->point_c, triangle->color));
+    triangle->color = colorSplit(rt->pars.splitrest[4]);
+    return(triangle);
+}
+
+void triangle_parsing(t_minirt *rt)
+{
+    t_triangle *triangle;
+
+   triangle = NULL;
+    if (ft_count(rt->pars.splitrest) == 4)
+        triangle = triangle_one(rt,triangle);
+    else if (ft_count(rt->pars.splitrest) == 5)
+    {
+        triangle = triangle_one(rt, triangle);
+        triangle->translation = vectorSplit(rt->pars.splitrest[5]);
+        triangle->point_a = vectoradd(triangle->point_a, triangle->translation);
+        triangle->point_b = vectoradd(triangle->point_b, triangle->translation);
+        triangle->point_c = vectoradd(triangle->point_c, triangle->translation);
+    }
+    else
+    {
+        free(triangle);
+        obj_error(26);
+        exit(1);
+    }
+    add_objects(&rt->list_obj, add_triangle_data(rt,triangle->point_a, triangle->point_b, triangle->point_c, triangle->color));
+    free(triangle);
 }
 
 
-double    triangle_equation(t_minirt *rt)
+double    triangle_equation(t_minirt *rt,t_vector  ray_direction,t_vector origin)
 {
     t_use scal;
     
-    scal.edge1 = vectorSub(rt->list_obj->point_b,rt->list_obj->point_a);
-    scal.edge2 = vectorSub(rt->list_obj->point_c,rt->list_obj->point_a);
-    scal.vect = vectorCross(rt->ray_direction,scal.edge2);
-    scal.determinant = vectorDot(scal.vect,scal.edge1);
-    if (scal.determinant < __DBL_EPSILON__ || fabs(scal.determinant) < __DBL_EPSILON__)
+    scal.edge1 = vectorsub(rt->list_obj->point_b,rt->list_obj->point_a);
+    scal.edge2 = vectorsub(rt->list_obj->point_c,rt->list_obj->point_a);
+    scal.vect = vectorCross(ray_direction,scal.edge2);
+    scal.determinant = vectordot(scal.vect,scal.edge1);
+    if (fabs(scal.determinant) < __DBL_EPSILON__ )
         return(0);
-//calculate distance from point_a to ray origin
-    scal.diffrence= vectorSub(rt->cam->look_from,rt->list_obj->point_a);
+    scal.diffrence= vectorsub(origin,rt->list_obj->point_a);
     scal.inverse_determinant = 1.0/scal.determinant;
-// calculate U parameter and test bounds
-    scal.u = (scal.inverse_determinant)* (vectorDot(scal.diffrence,scal.vect));
+    scal.u = (scal.inverse_determinant)* (vectordot(scal.diffrence,scal.vect));
     if(scal.u < 0.0 || scal.u > 1.0 )
         return(0);
     scal.vect1 = vectorCross(scal.diffrence,scal.edge1);
-    scal.v = (vectorDot(scal.vect1,rt->ray_direction))*(scal.inverse_determinant);
-//prepare to test V parameter 
+    scal.v = (vectordot(scal.vect1,ray_direction))*(scal.inverse_determinant);
     if(scal.v < 0 || scal.v + scal.u > 1.0)
             return(0);
-    rt->list_obj->normal = vectorCross(scal.edge1,scal.edge2);
-    rt->solution = (vectorDot(scal.vect1,scal.edge2)) * (scal.inverse_determinant);
-//printf("==>%f",rt->solution);
+    rt->solution = (vectordot(scal.vect1,scal.edge2)) * (scal.inverse_determinant);
             return(rt->solution);
-}
+}   
 
 void    calcul_triangle(t_minirt *rt)
 {
     t_use scal;
-    
-    scal.one_scal = vectorScale(rt->ray_direction, rt->list_obj->solution);
-    rt->list_obj->position = vectorAdd(rt->cam->look_from, scal.one_scal);
+
+        scal.edge1 = vectorsub(rt->list_obj->point_b,rt->list_obj->point_a);
+    scal.edge2 = vectorsub(rt->list_obj->point_c,rt->list_obj->point_a);
+    scal.one_scal = vectorscale(rt->ray_direction, rt->list_obj->solution);
+    rt->list_obj->position = vectoradd(rt->list_camera->look_from, scal.one_scal);
+        rt->list_obj->normal = vectorCross(scal.edge1,scal.edge2);
     rt->list_obj->normal = vectorNorme(rt->list_obj->normal);
-    //rt->l_norm = vectorSub(rt->light->position, rt->list_obj->position);
+        if(vectordot( rt->list_obj->normal,rt->ray_direction) > __DBL_EPSILON__)
+            rt->list_obj->normal = vectorscale(rt->list_obj->normal,(-1));
+    rt->list_obj->normal = vectorNorme(rt->list_obj->normal);
+
+    //rt->l_norm = vectorsub(rt->light->position, rt->list_obj->position);
 }

@@ -6,11 +6,11 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 09:36:24 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 11:25:44 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/11/24 16:44:40 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "../headers/minirt.h"
 
 t_vector vectorCross(t_vector v1, t_vector v2)
 {
@@ -50,4 +50,13 @@ t_vector produit_Vect(t_vector v1, t_vector v2)
     double e3 = v1.x * v2.y - v1.y * v2.x;
     t_vector prod = {e1, e2, e3};
     return (prod);
+}
+
+
+double      distance(t_vector one,t_vector two)
+{
+    double result;
+
+    result = sqrt((pow((two.x - one.x),2) +pow((two.y - one.y),2)+ pow((two.z - one.z ),2) ));
+    return(result);
 }

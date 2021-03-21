@@ -1,9 +1,41 @@
-pl  0,-1.6,0   0,1,0  255,0,0
+R   1900           1900
 
-R   1000           900
+A   0.1          255,255,255
 
-A   0           255,255,255
+c   0,0,-3  0,0,1   120          0,0,0       0,0,0
+c   0,0,-2  0,0,1   120          0,0,0       0,0,0
+# c   0.5,0,-2  0,0,1   120          0,0,0       0,0,0
 
-C   0,0,5  0,0,-1   90
+# c   0,0,-8  0,0,1   120          0,0,0       0,0,0
+# c   0,0,-2  0,0,1   120          0,0,0       0,0,0
 
-L   1,1,0  0.3          255,255,255
+l   1,0.3,3  0.3          255,255,255        0,0,0 
+
+l   0.2,-1,0  0.3          255,255,255        0,0,0 
+
+
+pl  4,1,1   0,1,0  255,0,0     0,0,-2        
+
+
+# cy     0,0,3      0,1,0          255,0,0   1  5    0,0,0   0,0,0./
+
+
+t_sphere    *spher_one(t_minirt *rt,t_sphere *sphere)
+{
+    
+    if(!(sphere =  malloc(sizeof(t_sphere))))
+       {
+           obj_error(23);
+           exit(1);
+       } 
+    
+    sphere->center = vectorSplit(rt->pars.splitrest[1]);
+    sphere->radius = convert_to_double(rt->pars.splitrest[2]);
+    if ( sphere->radius < 0 )
+        {
+            obj_error(22);
+            exit(1);
+        }
+    sphere->color  = colorSplit(rt->pars.splitrest[3]);
+    return(sphere);
+}

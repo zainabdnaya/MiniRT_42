@@ -6,13 +6,13 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 09:06:57 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/22 11:43:13 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/11/28 01:58:19 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "../headers/minirt.h"
 
-t_vector vectorAdd(t_vector v1, t_vector v2)
+t_vector vectoradd(t_vector v1, t_vector v2)
 {
     t_vector w;
 
@@ -22,7 +22,7 @@ t_vector vectorAdd(t_vector v1, t_vector v2)
     return (w);
 }
 
-t_vector vectorSub(t_vector v1, t_vector v2)
+t_vector vectorsub(t_vector v1, t_vector v2)
 {
     t_vector w;
 
@@ -32,7 +32,7 @@ t_vector vectorSub(t_vector v1, t_vector v2)
     return (w);
 }
 
-t_vector vectorScale(t_vector v1, double m)
+t_vector vectorscale(t_vector v1, double m)
 {
     t_vector w;
 
@@ -42,7 +42,7 @@ t_vector vectorScale(t_vector v1, double m)
     return (w);
 }
 
-t_vector vectorDiv(t_vector v1, double d)
+t_vector vectordiv(t_vector v1, double d)
 {
     t_vector w;
 
@@ -52,7 +52,7 @@ t_vector vectorDiv(t_vector v1, double d)
     return (w);
 }
 
-double vectorDot(t_vector v1, t_vector v2)
+double vectordot(t_vector v1, t_vector v2)
 {
     double m;
 

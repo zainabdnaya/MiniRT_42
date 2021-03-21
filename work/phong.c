@@ -3,61 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <diyanazizo13@gmail.com>            +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 16:52:23 by zdnaya            #+#    #+#             */
-/*   Updated: 2020/10/26 21:33:39 by zdnaya           ###   ########.fr       */
+/*   Updated: 2020/11/28 01:58:19 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
-
-//note : Diffuse objects do not receive light from other objects. 
-//k_a \in [0,1] : constante liée à la composante ambiante, la proportion de lumière renvoyée ;
-//La composante ambiante représente les parasites provenant d'autre chose que la source considérée,
-//la lumière réfléchie par d'autres points par exemple. 
-//La lumière ambiante est supposée égale en tout point de l'espace
-
+#include "../headers/minirt.h"
 
 
 t_vector ambiant(t_minirt *rt)
 {
-    double ka =rt->ambient.ratio;
     t_vector amb;
-    t_color color;
-    
-    color = rt->result_color;
-    amb.x = rt->ambient.color.r * ka * color.r;
-    amb.y = rt->ambient.color.g * ka * color.g;
-    amb.z = rt->ambient.color.b * ka * color.b;    
+
+    amb.x = rt->ambient.color.r * rt->ambient.ratio * rt->result_color.r;
+    amb.y = rt->ambient.color.g * rt->ambient.ratio * rt->result_color.g;
+    amb.z = rt->ambient.color.b * rt->ambient.ratio * rt->result_color.b;    
     amb.x = min(1, amb.x);  
     amb.y = min(1, amb.y);
     amb.z = min(1, amb.z);
     return (amb);
 }
 
-//Ambient lighting by itself doesn't produce the most interesting results, 
-//but diffuse lighting however will start to give a significant visual impact on the object. 
-//Diffuse lighting gives the object more brightness the closer its fragments are aligned to the light rays from a light source. 
-//the lower the angle between two unit vectors, the more the dot product is inclined towards a value of 1
-//Amount of light energy that falls on surface is proportional to incidence angle, θ in our case it's m 
 t_vector diffuse(t_minirt *rt)
 {
     t_vector Id;
     double m;
-    t_color color;
 
-    color = rt->result_color;
-   rt->l_norm = vectorSub(rt->light->position, rt->position);
-    rt->l_norm = vectorNorme(rt->l_norm);
-    m = vectorDot(rt->l_norm, rt->n_norm);
+    m = vectordot(rt->l_norm, rt->n_norm);
     m = max(0.0,m);
-    Id.x = rt->light->ratio  * m *  color.r ;
-    Id.y = rt->light->ratio  * m *  color.g ;
-    Id.z = rt->light->ratio  * m *  color.b ;
+    Id.x = rt->ratio  * m *  rt->result_color.r * rt->light_rgb.r ;
+    Id.y = rt->ratio  * m *  rt->result_color.g * rt->light_rgb.g ;
+    Id.z = rt->ratio  * m *  rt->result_color.b * rt->light_rgb.b ;
     return (Id);
 }
 
+void        specular_data(t_minirt *rt)
+{
+    if(rt->check ==2  || rt->check == 3 || rt->check == 4)
+    {
+        rt->shininess = 10;
+        rt->ks = 0.2;
+    }
+    else if (rt->check == 5)
+    {
+        rt->shininess = 500;
+        rt->ks = 0.5;
+    }
+    else if (rt->check == 1)
+    {
+        rt->shininess = 500;
+        rt->ks = 0.5;
+    }
+}
 
 
 t_vector spec(t_minirt *rt)
@@ -67,21 +66,18 @@ t_vector spec(t_minirt *rt)
     t_vector specular;
     t_vector reflection;
     t_vector view;
-    double ks = 1;
-    double constante = 1000;
-    t_color color;
 
-    color = rt->result_color;
-    dot = 2 * vectorDot(rt->n_norm, rt->l_norm);
-    scal = vectorScale(rt->n_norm, dot);
-    reflection = vectorSub(rt->l_norm,scal );
-     reflection = vectorNorme(reflection);
-    view = vectorScale(rt->position, 1);
+    dot = 2 * vectordot(rt->n_norm, rt->l_norm);
+    scal = vectorscale(rt->n_norm, dot);
+    reflection = vectorsub(scal,rt->l_norm );
+    reflection = vectorNorme(reflection);
+    view = vectorscale(rt->ray_direction, -1);
     view = vectorNorme(view);
-    dot = vectorDot(reflection, view);
+    dot = vectordot(reflection, view);
     dot = max(0.0,dot);
-    specular.x = ks * rt->light->rgb.r * pow(dot, constante) ;
-    specular.y = ks * rt->light->rgb.g * pow(dot, constante) ;
-    specular.z = ks * rt->light->rgb.b * pow(dot, constante) ;
+    specular_data(rt);
+    specular.x = rt->ks * rt->light_rgb.r * pow(dot, rt->shininess) ;
+    specular.y = rt->ks * rt->light_rgb.g * pow(dot, rt->shininess) ;
+    specular.z = rt->ks * rt->light_rgb.b * pow(dot, rt->shininess) ;
     return (specular);
 }
