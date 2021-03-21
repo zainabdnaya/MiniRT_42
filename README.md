@@ -9,11 +9,12 @@ This project is an introduction to the beautiful world of Raytracing.
 
 
 Objects : 
-  -[x] sphere 
-  -[x] triangle  
-  -[x] plane 
-  -[x] cylinder
-  -[x] square
+  - [x] sphere 
+  - [x] triangle  
+  - [x] plane 
+  - [x] cylinder
+  - [x] square
+  <br>
   <a href="https://ibb.co/GJxYDsW"><img src="https://i.ibb.co/qnyq80N/minirt.png" alt="minirt" border="0"></a>
   <a href="https://ibb.co/VqvWHcP"><img src="https://i.ibb.co/BCgV45S/Screen-Shot-2020-11-12-at-19-09-49.png" alt="Screen-Shot-2020-11-12-at-19-09-49" border="0"></a>
 **To Usage:**
