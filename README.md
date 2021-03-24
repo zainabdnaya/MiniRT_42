@@ -5,22 +5,22 @@
      Ray tracing is a rendering technique that can produce incredibly realistic lighting effects.
     Essentially, an algorithm can trace the path of light,and then simulate the way that the light 
     interacts with the virtual objects it ultimately hits in the computer-generated world. 
-
-<a href="https://ibb.co/Hq91FCV"><img src="https://i.ibb.co/vkMgwhH/Screen-Shot-2020-10-31-at-21-20-39.png" alt="Screen-Shot-2020-10-31-at-21-20-39" border="0"></a>
-
-
-Objects : 
+    
+   ## Objects : 
   - [x] sphere 
   - [x] triangle  
   - [x] plane 
   - [x] cylinder
   - [x] square
+
+<a href="https://ibb.co/Hq91FCV"><img src="https://i.ibb.co/vkMgwhH/Screen-Shot-2020-10-31-at-21-20-39.png" alt="Screen-Shot-2020-10-31-at-21-20-39" border="0"></a>
   <br>
   <a href="https://ibb.co/GJxYDsW"><img src="https://i.ibb.co/qnyq80N/minirt.png" alt="minirt" border="0"></a>
   <a href="https://ibb.co/VqvWHcP"><img src="https://i.ibb.co/BCgV45S/Screen-Shot-2020-11-12-at-19-09-49.png" alt="Screen-Shot-2020-11-12-at-19-09-49" border="0"></a>
-  
   <br>
-## To Use
+  
+  
+## To Use!
 <br>The scene must be correctly formatted.
 <br>This project is using the Minilibx using the Metal framework and therefore should work only on macOS 10.13+.
 <br>You should follow this guide if you want to compile it on Linux.
