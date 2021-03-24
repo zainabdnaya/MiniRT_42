@@ -20,12 +20,12 @@ Objects :
   <a href="https://ibb.co/VqvWHcP"><img src="https://i.ibb.co/BCgV45S/Screen-Shot-2020-11-12-at-19-09-49.png" alt="Screen-Shot-2020-11-12-at-19-09-49" border="0"></a>
   
   <br>
-** To Usage: **
+##To Use
 <br>The scene must be correctly formatted.
 <br>This project is using the Minilibx using the Metal framework and therefore should work only on macOS 10.13+.
 <br>You should follow this guide if you want to compile it on Linux.
 
-##### Resource👩🏻‍🏫🎯
+##### Resource 👩🏻‍🏫🎯
   <br>-http://www.realtimerendering.com/raytracinggems/unofficial_RayTracingGems_v1.4.pdf
   <br>-https://www.cs.unc.edu/~rademach/xroads-RT/RTarticle.html
   <br>-https://developer.nvidia.com/rtx/raytracing
