@@ -25,7 +25,7 @@
 <br>This project is using the Minilibx using the Metal framework and therefore should work only on macOS 10.13+.
 <br>You should follow this guide if you want to compile it on Linux.
 
-##### Resource 👩🏻‍🏫🎯
+## Resource 👩🏻‍🏫🎯
   <br>-http://www.realtimerendering.com/raytracinggems/unofficial_RayTracingGems_v1.4.pdf
   <br>-https://www.cs.unc.edu/~rademach/xroads-RT/RTarticle.html
   <br>-https://developer.nvidia.com/rtx/raytracing
